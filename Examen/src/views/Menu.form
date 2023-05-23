@@ -400,6 +400,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Exportar"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnExportarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnActualizar">
               <Properties>

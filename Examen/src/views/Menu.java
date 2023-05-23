@@ -1,6 +1,9 @@
 
 package views;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.ElementoQuimico;
@@ -222,6 +225,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnExportar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnExportar.setText("Exportar");
+        btnExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExportarMouseClicked(evt);
+            }
+        });
 
         btnActualizar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
@@ -448,6 +456,21 @@ public class Menu extends javax.swing.JFrame {
             limpiarCampos();
         }
     }//GEN-LAST:event_btnActualizarMouseClicked
+
+    private void btnExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseClicked
+        System.out.println("Inico guardar archivo");
+        File archivo = new File("C:\\test\\tlbElementos.txt");
+        PrintWriter escribir;
+        try {
+            escribir = new PrintWriter(archivo);
+            for(ElementoQuimico elementoQuimico : elementosQuimicos){
+                escribir.print(elementoQuimico.toString()+"\n");
+            }
+            escribir.close();
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnExportarMouseClicked
 
     /**
      * @param args the command line arguments

@@ -82,9 +82,11 @@ public class ElementoQuimico {
     
     public static void llenarElementos(){
         elementosQuimicos.add(new ElementoQuimico("1","Helio","4.00","2","He","Rojo"));
-        elementosQuimicos.add(new ElementoQuimico("2","Magnesio","24.31","12","Mg","Rosa"));
-        elementosQuimicos.add(new ElementoQuimico("3","Titanio","47.87","22","Ti","Rosa"));
+        elementosQuimicos.add(new ElementoQuimico("2","Magnesio","24.31","12","Mg","Crema"));
+        elementosQuimicos.add(new ElementoQuimico("3","Titanio","47.87","22","Ti","Crema"));
         elementosQuimicos.add(new ElementoQuimico("4","Germanio","72.64","32","Ge","Morado"));
+        elementosQuimicos.add(new ElementoQuimico("5","Molibdeno","95.94","42","Mo","Crema"));
+
     }
     
     public static void listaElementosForE(){
