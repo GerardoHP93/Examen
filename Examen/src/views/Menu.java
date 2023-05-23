@@ -1,6 +1,8 @@
 
 package views;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.ElementoQuimico;
 import static models.ElementoQuimico.elementosQuimicos;
 
@@ -9,6 +11,13 @@ import static models.ElementoQuimico.elementosQuimicos;
  * @author Gerardo Herrera
  */
 public class Menu extends javax.swing.JFrame {
+    
+    DefaultTableModel dataElementos = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row,int column){
+           return false;
+         } 
+    };
 
     /**
      * Creates new form Menu
@@ -16,6 +25,14 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         ElementoQuimico.llenarElementos();
         initComponents();
+        
+        this.txtRecNo.setText("-1");
+        this.txtRecNo.setVisible(false);
+
+        setModelo();
+        setDatos();
+        tlbElementos.repaint();
+        limpiarCampos();
     }
 
     /**
@@ -44,10 +61,14 @@ public class Menu extends javax.swing.JFrame {
         txtSimbolo = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
         txtRecNo = new javax.swing.JTextField();
+        btnLimpiar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaMostrarDatos = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tlbElementos = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,11 +83,6 @@ public class Menu extends javax.swing.JFrame {
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAceptarMouseClicked(evt);
-            }
-        });
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
             }
         });
 
@@ -103,6 +119,14 @@ public class Menu extends javax.swing.JFrame {
 
         txtColor.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
+        btnLimpiar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -119,9 +143,11 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel5)
-                                .addComponent(jLabel6)
                                 .addComponent(jLabel7)
-                                .addComponent(jLabel8))
+                                .addComponent(jLabel8)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(23, 23, 23)
+                                    .addComponent(btnLimpiar)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnAceptar)
@@ -129,12 +155,18 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(txtSimbolo)
                                 .addComponent(txtMasa)
                                 .addComponent(txtNombre)
-                                .addComponent(txtId)
-                                .addComponent(txtNumero))))
+                                .addComponent(txtId))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(32, 32, 32)
+                                .addComponent(txtNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +177,11 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtMasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,8 +197,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(btnAceptar)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnLimpiar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
@@ -175,33 +209,75 @@ public class Menu extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
         jPanel3.setForeground(new java.awt.Color(255, 255, 204));
 
-        txtAreaMostrarDatos.setColumns(20);
-        txtAreaMostrarDatos.setRows(5);
-        jScrollPane1.setViewportView(txtAreaMostrarDatos);
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mostrar Datos");
+
+        btnEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
+
+        btnExportar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnExportar.setText("Exportar");
+
+        btnActualizar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
+            }
+        });
+
+        tlbElementos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tlbElementos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(198, 198, 198))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(285, 285, 285))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnEliminar)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnActualizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExportar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExportar)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel9.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
@@ -215,8 +291,8 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(260, 260, 260)
@@ -230,8 +306,10 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -255,10 +333,46 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    //Métodos necesarios para que funcione el JTable
+    
+    public void setModelo(){
+        String[] tlbCabecera = {"No ","ID","Nombre","Masa Atómica","Número Atomico","Simbolo", "Color"};
+        dataElementos.setColumnIdentifiers(tlbCabecera);
+        tlbElementos.setModel(dataElementos);
+    }
+    
+    public void setDatos(){
+        Object[] datos = new Object[dataElementos.getColumnCount()];
+        int i =0;
+        dataElementos.setRowCount(0);
+        for (ElementoQuimico elementoQuimico : elementosQuimicos) {
+            datos[0] = i;
+            datos[1] = elementoQuimico.getId();
+            datos[2] = elementoQuimico.getNombre();
+            datos[3] = elementoQuimico.getMasaAtomica();
+            datos[4] = elementoQuimico.getNumeroAtomico();
+            datos[5] = elementoQuimico.getSimbolo();
+            datos[6] = elementoQuimico.getColor();
 
+            i++;
+            dataElementos.addRow(datos);
+        }
+        tlbElementos.setModel(dataElementos);
+        
+    }
+    
+    
+    public void limpiarCampos(){
+        this.txtRecNo.setText("-1");
+        this.txtId.setText("");
+        this.txtNombre.setText("");
+        this.txtMasa.setText("");
+        this.txtNumero.setText("");
+        this.txtSimbolo.setText("");
+        this.txtColor.setText("");
+
+    }
+    
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         /*  Codigo de primeros commit
         
@@ -275,10 +389,65 @@ public class Menu extends javax.swing.JFrame {
         String simbolo = this.txtSimbolo.getText();
         String color = this.txtColor.getText();
         
+        if (recNo == -1) {
+            ElementoQuimico.añadirElementos(id, nombre, masaAtomica,numeroAtomico, simbolo,color );
+        }else{
+            ElementoQuimico.actualizarElemento(recNo, id, nombre, masaAtomica,numeroAtomico, simbolo,color );
+            this.btnActualizar.setSelected(false);
+        }
 
-        ElementoQuimico.añadirElementos(id, nombre, masaAtomica,numeroAtomico, simbolo,color );
+        setDatos();
+        limpiarCampos(); 
             
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+        limpiarCampos();
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        int filaActual = tlbElementos.getSelectedRow();
+
+        if (filaActual != -1) {
+            ElementoQuimico.eliminarElementos(filaActual);
+            setDatos();
+        } else{
+            JOptionPane.showMessageDialog( null, "No hay filas existentes para eliminar");
+        } 
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        int filaActual = tlbElementos.getSelectedRow();
+        System.out.println(filaActual);
+        System.out.println(this.btnActualizar.isSelected());
+        
+        if (this.btnActualizar.isSelected()) {
+            if (filaActual != -1) {
+                System.out.println(dataElementos.getValueAt(filaActual, 0));
+                System.out.println(dataElementos.getValueAt(filaActual, 1));
+                System.out.println(dataElementos.getValueAt(filaActual, 2));
+                System.out.println(dataElementos.getValueAt(filaActual, 3));
+                System.out.println(dataElementos.getValueAt(filaActual, 4));
+                System.out.println(dataElementos.getValueAt(filaActual, 5));
+                System.out.println(dataElementos.getValueAt(filaActual, 6));
+
+                
+                this.txtRecNo.setText(""+dataElementos.getValueAt(filaActual, 0));
+                this.txtId.setText(""+dataElementos.getValueAt(filaActual, 1));
+                this.txtNombre.setText(""+dataElementos.getValueAt(filaActual, 2));
+                this.txtMasa.setText(""+dataElementos.getValueAt(filaActual, 3));
+                this.txtNumero.setText(""+dataElementos.getValueAt(filaActual, 4));
+                this.txtSimbolo.setText(""+dataElementos.getValueAt(filaActual, 5));
+                this.txtColor.setText(""+dataElementos.getValueAt(filaActual, 6));
+
+            }else{
+                JOptionPane.showMessageDialog( null, "Debe seleccionar un registro");
+                this.btnActualizar.setSelected(false);
+            } 
+        }else{
+            limpiarCampos();
+        }
+    }//GEN-LAST:event_btnActualizarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -317,6 +486,10 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JToggleButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnExportar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -329,8 +502,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtAreaMostrarDatos;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tlbElementos;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtMasa;
