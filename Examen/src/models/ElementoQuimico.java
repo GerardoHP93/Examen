@@ -12,21 +12,31 @@ import java.util.ArrayList;
  */
 public class ElementoQuimico {
     
+    private String id;
     private String nombre;
     private String masaAtomica;
     private String numeroAtomico;
-    private String simboloQuimico;
+    private String simbolo;
     private String color;
     
     public static ArrayList<ElementoQuimico> elementosQuimicos = new ArrayList<>();
 
 
-    public ElementoQuimico(String nombre, String masaAtomica, String numeroAtomico, String simboloQuimico, String color) {
+    public ElementoQuimico(String id,String nombre, String masaAtomica, String numeroAtomico, String simboloQuimico, String color) {
+        this.id = id;
         this.nombre = nombre;
         this.masaAtomica = masaAtomica;
         this.numeroAtomico = numeroAtomico;
-        this.simboloQuimico = simboloQuimico;
+        this.simbolo = simboloQuimico;
         this.color = color;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -53,12 +63,12 @@ public class ElementoQuimico {
         this.numeroAtomico = numeroAtomico;
     }
 
-    public String getSimboloQuimico() {
-        return simboloQuimico;
+    public String getSimbolo() {
+        return simbolo;
     }
 
-    public void setSimboloQuimico(String simboloQuimico) {
-        this.simboloQuimico = simboloQuimico;
+    public void setSimbolo(String simboloQuimico) {
+        this.simbolo = simboloQuimico;
     }
 
     public String getColor() {
@@ -71,41 +81,43 @@ public class ElementoQuimico {
     
     
     public static void llenarElementos(){
-        elementosQuimicos.add(new ElementoQuimico("Helio","4.00","2","He","Rojo"));
-        elementosQuimicos.add(new ElementoQuimico("Magnesio","24.31","12","Mg","Rosa"));
-        elementosQuimicos.add(new ElementoQuimico("Titanio","47.87","22","Ti","Rosa"));
-        elementosQuimicos.add(new ElementoQuimico("Germanio","72.64","32","Ge","Morado"));
-
+        elementosQuimicos.add(new ElementoQuimico("1","Helio","4.00","2","He","Rojo"));
+        elementosQuimicos.add(new ElementoQuimico("2","Magnesio","24.31","12","Mg","Rosa"));
+        elementosQuimicos.add(new ElementoQuimico("3","Titanio","47.87","22","Ti","Rosa"));
+        elementosQuimicos.add(new ElementoQuimico("4","Germanio","72.64","32","Ge","Morado"));
     }
-    
     
     public static void listaElementosForE(){
         System.out.println("For each");
         for (ElementoQuimico elementoQuimico : elementosQuimicos) {
-            System.out.println(ElementoQuimico);
+            System.out.println(elementoQuimico);
         }
     }
     
     
     public static void eliminarElementos(int id){
-        estados.remove(id);
+        elementosQuimicos.remove(id);
     }
         
-    public static void añadirElementos(String id,String nombre, String municipio){
-        estados.add(new Estado(id,nombre,municipio));
+    public static void añadirElementos(String id, String nombre, String masaAtomica, String numeroAtomico, String simbolo, String color){
+        elementosQuimicos.add(new ElementoQuimico(id,nombre,masaAtomica,numeroAtomico,simbolo,color));
     }
     
-    public static void actualizarElemento(int recNo, String id, String nombre, String municipio){
-        estados.get(recNo).setId(id);
-        estados.get(recNo).setNombre(nombre);
-        estados.get(recNo).setMunicipio(municipio);
-
+    public static void actualizarElemento(int recNo,String id,String nombre, String masaAtomica, String numeroAtomico, String simbolo, String color){
+        
+        elementosQuimicos.get(recNo).setId(id);       
+        elementosQuimicos.get(recNo).setNombre(nombre);
+        elementosQuimicos.get(recNo).setMasaAtomica(masaAtomica);
+        elementosQuimicos.get(recNo).setNumeroAtomico(numeroAtomico);
+        elementosQuimicos.get(recNo).setSimbolo(simbolo);
+        elementosQuimicos.get(recNo).setColor(color);
     }
     
     @Override
     public String toString() {
 
-        return "Estado{" + "id=" + id + ", nombre=" + nombre +" municipio= "+ municipio + '}';
+        return "Elemento quimico{" + " nombre= " + nombre +" id = " + id + ", masa atomica= "+ 
+                masaAtomica + ", numero atomico = "                + numeroAtomico+ ", simbolo = "+ simbolo + ", color = " + color + '}';
     }
 
 
@@ -115,4 +127,4 @@ public class ElementoQuimico {
     
     
     
-}
+
