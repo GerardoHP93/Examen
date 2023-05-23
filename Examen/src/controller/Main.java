@@ -4,13 +4,15 @@
  */
 package controller;
 
+import views.Menu;
+
 /**
  *
  * @author Gerardo Herrera
  */
 public class Main {
     
-    
+    static Menu menu = new Menu();
 
     public static void author68612(){
         System.out.println("Nombre: Gerardo Isidro Herrera Pacheco");
@@ -22,7 +24,10 @@ public class Main {
     
     
     public static void main(String[] args) {
-        
+        author68612();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+
     }       
     
 }
