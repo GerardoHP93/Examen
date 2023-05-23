@@ -2,13 +2,16 @@
 
 Herrera Pacheco Gerardo Isidro Herrera Pacheco ISC 4B
 
-El codigo es muy similar a la de la tarea de catálogo de Estados y Municipios por eso se me hace innecesario volverlo a explicar, solo añadi como el avance en el funcionamiento del programa según las instrucciones
+El codigo es muy similar a la de la tarea de catálogo de Estados y Municipios por eso se me hace innecesario volverlo a explicar, a lo que cambia es la modificación en las columnas del JTable y a la hora de hacer recorridos ahora se incluyen más atributos. Solo añadi como el avance en el funcionamiento del programa según las instrucciones.
+
+![image](https://github.com/GerardoHP93/Examen/assets/129221361/b979aa2d-f758-4f4e-83c6-bfd223176854)
+
 
 ## Método para mostrar datos
 
 ![image](https://github.com/GerardoHP93/Examen/assets/129221361/3d6c1530-241f-4ff9-8526-c1b2d591cbd3)
 
-## Creación clase Elemento atómico, con sus atributos respectivos y se muestran en un frame, un txtArea elegi para empezar.
+## Creación clase Elemento atómico, con sus atributos respectivos y se muestran en un frame, un txtArea elegi para empezar. Los datos se imprimen por el ToString que hice
 
 ![Commit 2](https://github.com/GerardoHP93/Examen/assets/129221361/0706de58-11e6-47f4-8020-044a364957c0)
 
@@ -28,7 +31,7 @@ El codigo es muy similar a la de la tarea de catálogo de Estados y Municipios p
 
 ![image](https://github.com/GerardoHP93/Examen/assets/129221361/970db360-4944-440b-893c-d8d9664b4b52)
 
-## En un Jframe o Panel muestre los datos los elementos de la tabla periódica de conformidad con el número de su matrícula (Son los datos predeterminador que aparecen en la tabla).
+## En un Jframe o Panel muestre los datos los elementos de la tabla periódica de conformidad con el número de su matrícula (Son los datos predeterminados que aparecen en la tabla).
 
 ![commit 6](https://github.com/GerardoHP93/Examen/assets/129221361/f1774622-0c29-496e-90fc-0cce15e472cb)
 
